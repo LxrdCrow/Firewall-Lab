@@ -1,0 +1,91 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredPackages">
+        <list>
+          <option value="appdirs" />
+          <option value="attrs" />
+          <option value="bcrypt" />
+          <option value="beautifulsoup4" />
+          <option value="binwalk" />
+          <option value="certifi" />
+          <option value="chardet" />
+          <option value="cloud-init" />
+          <option value="command-not-found" />
+          <option value="configobj" />
+          <option value="constantly" />
+          <option value="contourpy" />
+          <option value="cryptography" />
+          <option value="cssselect" />
+          <option value="cycler" />
+          <option value="dbus-python" />
+          <option value="decorator" />
+          <option value="distro" />
+          <option value="distro-info" />
+          <option value="fail2ban" />
+          <option value="fonttools" />
+          <option value="fs" />
+          <option value="gunicorn" />
+          <option value="html5lib" />
+          <option value="httplib2" />
+          <option value="hyperlink" />
+          <option value="idna" />
+          <option value="incremental" />
+          <option value="iniconfig" />
+          <option value="jsonpatch" />
+          <option value="jsonpointer" />
+          <option value="jsonschema" />
+          <option value="kiwisolver" />
+          <option value="launchpadlib" />
+          <option value="lxml" />
+          <option value="lz4" />
+          <option value="markdown-it-py" />
+          <option value="matplotlib" />
+          <option value="mdurl" />
+          <option value="mpmath" />
+          <option value="netifaces" />
+          <option value="numpy" />
+          <option value="oauthlib" />
+          <option value="olefile" />
+          <option value="packaging" />
+          <option value="pillow" />
+          <option value="pluggy" />
+          <option value="psutil" />
+          <option value="pyasn1" />
+          <option value="pyasn1-modules" />
+          <option value="pyasyncore" />
+          <option value="pycurl" />
+          <option value="pyinotify" />
+          <option value="pyparsing" />
+          <option value="pyqtgraph" />
+          <option value="pyrsistent" />
+          <option value="pyserial" />
+          <option value="pytest" />
+          <option value="python-apt" />
+          <option value="python-dateutil" />
+          <option value="pytz" />
+          <option value="requests" />
+          <option value="rich" />
+          <option value="service-identity" />
+          <option value="setuptools" />
+          <option value="six" />
+          <option value="soupsieve" />
+          <option value="ssh-import-id" />
+          <option value="sympy" />
+          <option value="systemd-python" />
+          <option value="ubuntu-pro-client" />
+          <option value="unattended-upgrades" />
+          <option value="unicodedata2" />
+          <option value="urllib3" />
+          <option value="urwid" />
+          <option value="wadllib" />
+          <option value="wcwidth" />
+          <option value="webencodings" />
+          <option value="wheel" />
+          <option value="zombie-imp" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
