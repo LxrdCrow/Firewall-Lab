@@ -25,6 +25,8 @@ The system is designed to be modular, scalable, and easy to extend with addition
 
 [ Structure ]
 
+engine.py → brain of the firewall simulation
+
 ---
 
 ## Features

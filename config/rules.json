@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "type": "block_ip",
+    "value": "192.168.1.10",
+    "reason": "malicious IP",
+    "active": true
+  },
+  {
+    "id": 2,
+    "type": "allow_ip",
+    "value": "192.168.1.10",
+    "reason": "trusted admin",
+    "active": true
+  },
+  {
+    "id": 3,
+    "type": "block_port",
+    "value": "22",
+    "reason": "SSH blocked",
+    "active": true
+  },
+  {
+    "id": 4,
+    "type": "block_path",
+    "value": "/admin",
+    "reason": "restricted area",
+    "active": true
+  }
+
+]
