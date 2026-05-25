@@ -25,7 +25,22 @@ The system is designed to be modular, scalable, and easy to extend with addition
 
 [ Structure ]
 
-engine.py → brain of the firewall simulation
+Firewall-lab/
+├── api/
+│   └── routes.py        ← endpoint Flask (GET /rules, POST /simulate)
+├── config/
+│   └── rules.json
+├── core/
+│   └── engine.py        ← logica: valuta richieste, applica regole
+├── models/
+│   └── filter.py        ← dataclass: FirewallRequest, FirewallRule
+├── services/
+│   └── logger.py        ← logging trasversale
+├── storage/             ← futuro: SQLite, repo pattern
+├── tests/
+│   └── test_engine.py
+├── app.py               ← crea l'app Flask
+└── main.py              ← entrypoint
 
 ---
 
