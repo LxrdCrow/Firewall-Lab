@@ -27,20 +27,20 @@ The system is designed to be modular, scalable, and easy to extend with addition
 
 Firewall-lab/
 ├── api/
-│   └── routes.py        ← endpoint Flask (GET /rules, POST /simulate)
+│   └── routes.py        
 ├── config/
 │   └── rules.json
 ├── core/
-│   └── engine.py        ← logica: valuta richieste, applica regole
+│   └── engine.py       
 ├── models/
-│   └── filter.py        ← dataclass: FirewallRequest, FirewallRule
+│   └── filter.py      
 ├── services/
-│   └── logger.py        ← logging trasversale
-├── storage/             ← futuro: SQLite, repo pattern
+│   └── logger.py       
+├── storage/            
 ├── tests/
 │   └── test_engine.py
-├── app.py               ← crea l'app Flask
-└── main.py              ← entrypoint
+├── app.py               
+└── main.py            
 
 ---
 
