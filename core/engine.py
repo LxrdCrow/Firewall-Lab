@@ -2,19 +2,23 @@ import json
 from pathlib import Path
 
 RULES_FILE = Path("config/rules.json")
-DEFAULT_POLICY = "deny"  # "allow" o "deny"
+DEFAULT_POLICY = "deny"  # Available options: "allow" or "deny"
 
 def load_rules() -> list:
     with RULES_FILE.open("r") as f:
         rules = json.load(f)
-    # Ordina per priorità (più basso = più urgente)
+
+    # Apply rules in priority order (lower number = higher priority)
     return sorted(rules, key=lambda r: r.get("priority", 99))
 
 def normalize_request(request: dict) -> dict:
-    """Normalizza i tipi per evitare type mismatch."""
+    """Normalize the request data before evaluation."""
     normalized = request.copy()
+
+    # Convert port to int for consistent comparisons
     if "port" in normalized:
         normalized["port"] = int(normalized["port"])
+
     return normalized
 
 def evaluate_request(request: dict) -> dict:
@@ -22,6 +26,7 @@ def evaluate_request(request: dict) -> dict:
     request = normalize_request(request)
 
     for rule in rules:
+        # Skip disabled rules
         if not rule.get("active", True):
             continue
 
@@ -29,7 +34,7 @@ def evaluate_request(request: dict) -> dict:
         value = rule.get("value")
         reason = rule.get("reason", "no reason specified")
 
-        # Normalizza il valore della regola se è una porta
+        # Convert rule port values to int for consistent comparison
         if "port" in rule_type:
             value = int(value)
 
@@ -44,8 +49,17 @@ def evaluate_request(request: dict) -> dict:
 
         if rule_type in field_map:
             field, action = field_map[rule_type]
-            if request.get(field) == value:
-                return {"action": action, "reason": reason, "rule_id": rule.get("id")}
 
-    # Nessuna regola corrisponde → applica policy di default
-    return {"action": DEFAULT_POLICY, "reason": "default policy"}
+            # Apply the rule if the request field matches the rule value
+            if request.get(field) == value:
+                return {
+                    "action": action,
+                    "reason": reason,
+                    "rule_id": rule.get("id")
+                }
+
+    # Apply the default policy if no rule matches
+    return {
+        "action": DEFAULT_POLICY,
+        "reason": "default policy"
+    }
