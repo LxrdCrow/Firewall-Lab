@@ -85,5 +85,4 @@ python main.py
 This project is built for learning and portfolio purposes.  
 It demonstrates application-level firewall concepts and Python backend
 development practices including modular design, REST APIs, and logging.
-```
 
