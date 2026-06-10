@@ -1,65 +1,89 @@
-# Firewall Simulation
-<br>
-
----
-
-## Project Presentation
-<br>
+# Firewall-Lab
 
 A modular, application-level firewall simulation built in Python and Flask.  
-Firewall-Lab demonstrates core concepts of request filtering, rule management, logging, and basic threat detection for educational and portfolio purposes.
+Firewall-Lab demonstrates core concepts of request filtering, rule management,
+and logging for educational and portfolio purposes.
 
-<br>
+---
 
 ## Overview
 
-
-This project simulates a firewall environment where requests are analyzed and either allowed or blocked based on user-defined rules.  
-The system is designed to be modular, scalable, and easy to extend with additional security features.
-
+This project simulates a firewall environment where HTTP requests are analyzed
+and either allowed or blocked based on configurable rules. The system is designed
+to be modular and easy to extend with additional security features.
 
 ---
 
-### Repository
-<br>
+## Repository Structure
 
-[ Structure ]
-
+```
 Firewall-lab/
 ├── api/
-│   └── routes.py        
+│   └── routes.py        ← Flask Blueprint (endpoints)
 ├── config/
-│   └── rules.json
+│   └── rules.json       ← rule configuration
 ├── core/
-│   └── engine.py       
+│   └── engine.py        ← rule evaluation logic
 ├── models/
-│   └── filter.py      
+│   └── filter.py        ← dataclasses (FirewallRule, FirewallRequest)
 ├── services/
-│   └── logger.py       
-├── storage/            
+│   └── logger.py        ← request logging
+├── storage/             ← reserved for future persistence (SQLite)
+├── docs/                ← reserved for future documentation
 ├── tests/
-│   └── test_engine.py
-├── app.py               
-└── main.py            
+│   └── test_engine.py   ← pytest test suite
+├── app.py               ← Flask app factory
+├── main.py              ← entrypoint
+└── requirements.txt
+```
 
 ---
 
 ## Features
 
 - Core rule engine for request filtering (allow/deny)
-- JSON-based rule configuration for quick testing
-- Flask API to manage rules and simulate requests
-- Logging of blocked and allowed requests
-- Modular design for future integration with SQLite and dashboards
+- Priority-based rule evaluation
+- JSON-based rule configuration
+- Flask REST API to manage rules and simulate requests
+- Request logging via Python logging module
+- Modular design for future SQLite integration and dashboard
 
 ---
 
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/simulate` | Simulate a firewall request |
+| GET | `/rules` | List all active rules |
+| POST | `/rules` | Add a new rule |
+
+---
 
 ## Tech Stack
 
 - Python 3.11+
 - Flask
-- JSON for rule storage
-- SQLite (planned for persistence in later versions)
-- Pytest for testing
-- Python-dotenv for environment configuration
+- JSON (rule storage)
+- SQLite (planned)
+- Pytest
+- Python-dotenv
+
+---
+
+## Getting Started
+
+```bash
+pip install -r requirements.txt
+python main.py
+```
+
+---
+
+## Educational Purpose
+
+This project is built for learning and portfolio purposes.  
+It demonstrates application-level firewall concepts and Python backend
+development practices including modular design, REST APIs, and logging.
+```
+

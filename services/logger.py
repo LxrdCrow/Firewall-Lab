@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from models.filter import FirewallRequest
 
 Path("logs").mkdir(exist_ok=True)
 
@@ -12,6 +13,6 @@ handler.setFormatter(logging.Formatter(
 ))
 logger.addHandler(handler)
 
-def log_request(request: dict, result: dict):
+def log_request(request: FirewallRequest, result: dict):
     action = result["action"].upper()
-    logger.info(f"{action} | ip={request.get('ip')} port={request.get('port')} path={request.get('path')} | reason={result.get('reason')}")
+    logger.info(f"{action} | ip={request.ip} port={request.port} path={request.path} | reason={result.get('reason')}")

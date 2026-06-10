@@ -1,40 +1,29 @@
-import json
 from pathlib import Path
+from models.filter import FirewallRule, FirewallRequest
+import json
 
 RULES_FILE = Path("config/rules.json")
-DEFAULT_POLICY = "deny"  # Available options: "allow" or "deny"
+DEFAULT_POLICY = "deny"
 
-def load_rules() -> list:
+def load_rules() -> list[FirewallRule]:
     with RULES_FILE.open("r") as f:
         rules = json.load(f)
+    return sorted(
+        [FirewallRule.from_dict(r) for r in rules],
+        key=lambda r: r.priority
+    )
 
-    # Apply rules in priority order (lower number = higher priority)
-    return sorted(rules, key=lambda r: r.get("priority", 99))
-
-def normalize_request(request: dict) -> dict:
-    """Normalize the request data before evaluation."""
-    normalized = request.copy()
-
-    # Convert port to int for consistent comparisons
-    if "port" in normalized:
-        normalized["port"] = int(normalized["port"])
-
-    return normalized
-
-def evaluate_request(request: dict) -> dict:
+def evaluate_request(request: FirewallRequest) -> dict:
     rules = load_rules()
-    request = normalize_request(request)
 
     for rule in rules:
-        # Skip disabled rules
-        if not rule.get("active", True):
+        if not rule.active:
             continue
 
-        rule_type = rule.get("type", "")
-        value = rule.get("value")
-        reason = rule.get("reason", "no reason specified")
+        rule_type = rule.type
+        value = rule.value
+        reason = rule.reason
 
-        # Convert rule port values to int for consistent comparison
         if "port" in rule_type:
             value = int(value)
 
@@ -49,17 +38,23 @@ def evaluate_request(request: dict) -> dict:
 
         if rule_type in field_map:
             field, action = field_map[rule_type]
-
-            # Apply the rule if the request field matches the rule value
-            if request.get(field) == value:
+            if getattr(request, field) == value:
                 return {
                     "action": action,
                     "reason": reason,
-                    "rule_id": rule.get("id")
+                    "rule_id": rule.id
                 }
 
-    # Apply the default policy if no rule matches
     return {
-        "action": DEFAULT_POLICY,
-        "reason": "default policy"
-    }
+            "action": DEFAULT_POLICY,
+            "reason": "default policy"
+        }
+
+
+
+def save_rule(rule: FirewallRule):
+    rules = load_rules()
+    rules.append(rule.to_dict())
+    with RULES_FILE.open("w") as f:
+        json.dump(rules, f, indent=2)
+

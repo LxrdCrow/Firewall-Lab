@@ -31,13 +31,13 @@ class FirewallRule:
         return cls(**data)
 
 
-    @dataclass
-    class FirewallRequest:
-        ip: str
-        port: int
-        protocol: str
-        path: str
-        method: str
+@dataclass
+class FirewallRequest:
+    ip: str
+    port: int
+    protocol: str
+    path: str
+    method: str
 
 
 
