@@ -1,5 +1,6 @@
 from pathlib import Path
 from models.filter import FirewallRule, FirewallRequest
+from services.logger import log_request
 import json
 
 RULES_FILE = Path("config/rules.json")
@@ -39,22 +40,16 @@ def evaluate_request(request: FirewallRequest) -> dict:
         if rule_type in field_map:
             field, action = field_map[rule_type]
             if getattr(request, field) == value:
-                return {
-                    "action": action,
-                    "reason": reason,
-                    "rule_id": rule.id
-                }
+                result = {"action": action, "reason": reason, "rule_id": rule.id}
+                log_request(request, result)
+                return result
 
-    return {
-            "action": DEFAULT_POLICY,
-            "reason": "default policy"
-        }
-
-
+    result = {"action": DEFAULT_POLICY, "reason": "default policy"}
+    log_request(request, result)
+    return result
 
 def save_rule(rule: FirewallRule):
     rules = load_rules()
     rules.append(rule.to_dict())
     with RULES_FILE.open("w") as f:
         json.dump(rules, f, indent=2)
-

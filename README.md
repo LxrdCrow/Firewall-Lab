@@ -62,10 +62,9 @@ Firewall-lab/
 
 ## Tech Stack
 
-- Python 3.11+
+- Python 3.13+
 - Flask
 - JSON (rule storage)
-- SQLite (planned)
 - Pytest
 - Python-dotenv
 
